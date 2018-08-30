@@ -1,0 +1,26 @@
+input[type="button"]{
+    margin: 0 10px;
+    width: 120px;
+}
+
+label{
+    vertical-align: middle;
+}
+
+.verticalLine{
+    border-left: 1px solid #e5e5e5;
+}
+
+span{
+    color: red;
+    font-size: 20px;
+}
+
+.form-control.ng-touched.ng-invalid{
+    border: 2px solid red;
+}
+
+.missBtn{
+    margin-top: 15px !important;
+    width: 140px !important;
+}

@@ -1,0 +1,88 @@
+{
+    "LMCA": [
+        {
+            "ModelRun": "NAE",
+            "CCLoanNumber": "CC196001",
+            "OtherLoanNumber": "CC100001",
+            "PortfolioGroup": "CCHE",
+            "CCClientID": "CC000845 ",
+            "State": "California",
+            "County": "Alpine County",
+            "ZipCode": 95646,
+            "BankruptcyLoan": "True",
+            "Usecured": "False",
+            "MortgageInsuIndicator": "True",
+            "MortgageInsuInvestor": "Investor",
+            "CurrentAppraisedValue": 340000,
+            "CCForeclosure": {
+                "CCLStartDate": "07/08/2015",
+                "OLStartDate": "09/21/2011",
+                "CCLSaleDate": "05/13/2011",
+                "OLSaleDate": "09/15/2011"
+            }
+        },
+        {
+            "ModelRun": "Test",
+            "CCLoanNumber": "CC196002",
+            "OtherLoanNumber": "CC100002",
+            "PortfolioGroup": "B&P",
+            "CCClientID": "CC000846",
+            "State": "Arkansas",
+            "County": "Pike County",
+            "ZipCode": 90001,
+            "BankruptcyLoan": "False",
+            "Usecured": "False",
+            "MortgageInsuIndicator": "True",
+            "MortgageInsuInvestor": "Investor",
+            "CurrentAppraisedValue": 350000,
+            "CCForeclosure": {
+                "CCLStartDate": "08/09/2012",
+                "OLStartDate": "09/21/2013",
+                "CCLSaleDate": "05/13/2013",
+                "OLSaleDate": "09/20/2013"
+            }
+        },
+        {
+            "ModelRun": "SOPAC Review",
+            "CCLoanNumber": "CC196003",
+            "OtherLoanNumber": "CC100003",
+            "PortfolioGroup": "BEC",
+            "CCClientID": "CC000847",
+            "State": "Arkansas",
+            "County": "Washington County",
+            "ZipCode": 90002,
+            "BankruptcyLoan": "False",
+            "Usecured": "False",
+            "MortgageInsuIndicator": "True",
+            "MortgageInsuInvestor": "Investor",
+            "CurrentAppraisedValue": 360000,
+            "CCForeclosure": {
+                "CCLStartDate": "05/21/2014",
+                "OLStartDate": "09/21/2015",
+                "CCLSaleDate": "05/13/2015",
+                "OLSaleDate": "09/09/2015"
+            }
+        },
+        {
+            "ModelRun": "Tax",
+            "CCLoanNumber": "CC196004",
+            "OtherLoanNumber": "CC100004",
+            "PortfolioGroup": "BEC",
+            "CCClientID": "CC000848",
+            "State": "Arkansas",
+            "County": "Pike County",
+            "ZipCode": 90010,
+            "BankruptcyLoan": "True",
+            "Usecured": "True",
+            "MortgageInsuIndicator": "False",
+            "MortgageInsuInvestor": "Investor",
+            "CurrentAppraisedValue": 380000,
+            "CCForeclosure": {
+                "CCLStartDate": "08/24/2014",
+                "OLStartDate": "02/2/2015",
+                "CCLSaleDate": "07/18/2015",
+                "OLSaleDate": "09/09/2015"
+            }
+        }
+    ]
+}

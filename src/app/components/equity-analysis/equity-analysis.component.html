@@ -1,0 +1,321 @@
+<div class="row">
+    <div class="col-md-4">
+        <h1>Equity Analysis</h1>
+    </div>
+    <div class="col-md-8">
+        <div class="text-center alert alert-danger" *ngIf="(ModelRun.touched && !ModelRun.valid)||(PortfolioGroup.touched && !PortfolioGroup.valid)||(CCLoanNumber.touched && !CCLoanNumber.valid)||(CCClientID.touched && !CCClientID.valid)">Please enter required details</div>
+    </div>
+</div>
+
+<hr>
+<form name="equityAnalysisForm" #equityAnalysisForm="ngForm">
+    <div class="section1">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="statusDate">Status Date :</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="date" name="statusDate" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="subscriptionDate">Subscription Date :</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="date" name="subscriptionDate" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="calDate">Calculate Effective Date :</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="date" name="calDate" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="row">
+                    <button (click)="onRetrive()" class="btn btn-primary" [disabled]="!equityAnalysisForm.valid" name="retrieve">Retrieve</button>
+                    <button (click)="onSubmit()" class="btn btn-primary" [disabled]="!retriveTrue" name="submit">Submit</button>
+                    <button (click)="onReset()" class="btn btn-primary" name="reset">Reset</button>
+                    <button (click)="onSignOut()" class="btn btn-primary" name="signout">Sign Out</button>
+                </div>
+                <!-- <div class="row">
+                    <input type="button" *ngIf="missingValue" (click)="getMissingDetails()" class="missBtn btn btn-primary" value="Missing Details" name="missingDetails">
+                </div> -->
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="ModelRun">Purpose of Model Run
+                            <span>*</span> :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select [(ngModel)]="userEquityAnalysis.ModelRun" class="form-control" name="ModelRun" required ngModel #ModelRun="ngModel">
+                            <option value="select" selected>Select any</option>
+                            <option value="NAE">NAE</option>
+                            <option value="Test">Test</option>
+                            <option value="SOPAC Review">SOPAC Review</option>
+                            <option value="Tax">Tax</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="borrower">Borrower :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input class="form-control" [(ngModel)]="userEquityAnalysis.borrower" type="text" name="borrower" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="coBorrower">Co-Borrower :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input class="form-control" [(ngModel)]="userEquityAnalysis.coBorrower" type="text" name="coBorrower" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="PortfolioGroup">Portfolio Group
+                            <span>*</span> :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select [(ngModel)]="userEquityAnalysis.PortfolioGroup" name="PortfolioGroup" class="form-control" ngModel #PortfolioGroup="ngModel"
+                            required>
+                            <option value="select" selected>Select any</option>
+                            <option value="B&P">B&P</option>
+                            <option value="BEC">BEC</option>
+                            <option value="CCHE">CCHE</option>
+                            <option value="CCHM">CCHM</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="CCLoanNumber">Corcentric Loan Number
+                            <span>*</span> :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input class="form-control" type="text" name="CCLoanNumber" [(ngModel)]="userEquityAnalysis.CCLoanNumber" ngModel #CCLoanNumber="ngModel"
+                            required minlength=8 maxlength=8 pattern="^[A-Z0-9]*$" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="oloanNumber">Other Loan Number :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input class="form-control" [(ngModel)]="userEquityAnalysis.oloanNumber" type="number" name="oloanNumber" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label>Client ID :</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="CCClientID">Corcentric Loan
+                            <span>*</span>
+                        </label>
+                        <br />
+                        <input class="form-control" [(ngModel)]="userEquityAnalysis.CCClientID" type="text" name="CCClientID" ngModel #CCClientID="ngModel"
+                            required/>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="loanNumber">Other Loan</label>
+                        <br />
+                        <input class="form-control" [(ngModel)]="userEquityAnalysis.loanNumber" type="text" name="loanNumber" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section2" *ngIf="retriveTrue">
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <p>Property Address:</p>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="state">State
+                            <span>*</span> :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" required ngModel #State="ngModel" name="State" [(ngModel)]="dataValue.State" />
+                        <!-- <select class="form-control" [(ngModel)]="selectedCounty.id" (change)="onSelect($event.target.value)">
+                            <option value="0">Select</option>
+                            <option *ngFor="let county of counties" value={ {county.id}}>{{county.name}}
+                            </option>
+                        </select> -->
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="county">County
+                            <span>*</span> :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" required ngModel #State="ngModel" name="County" [(ngModel)]="dataValue.County" />
+                        <!-- <select class="form-control">
+                            <option value="0">Select</option>
+                            <option *ngFor="let state of states" value={ {state.id}}>{{state.name}}
+                            </option>
+                        </select> -->
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="ZipCode">Zipcode
+                            <span>*</span> :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input [(ngModel)]="dataValue.ZipCode" type="number" class="form-control" name="ZipCode" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="BankruptcyLoan">Bankruptcy Loan
+                            <span>*</span> :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="radio" value="True" name="BankruptcyLoan" [(ngModel)]="dataValue.BankruptcyLoan" />Yes
+                        <input type="radio" value="False" name="BankruptcyLoan" [(ngModel)]="dataValue.BankruptcyLoan" />No
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="Usecured">Unsecured
+                            <span>*</span> :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="radio" value="True" name="Usecured" [(ngModel)]="dataValue.Usecured" />Yes
+                        <input type="radio" value="False" name="Usecured" [(ngModel)]="dataValue.Usecured" />No
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="MortgageInsuIndicator">Mortgage Insurance Indicatior
+                            <span>*</span> :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="radio" value="True" name="MortgageInsuIndicator" [(ngModel)]="dataValue.MortgageInsuIndicator" />Yes
+                        <input type="radio" value="False" name="MortgageInsuIndicator" [(ngModel)]="dataValue.MortgageInsuIndicator" />No
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="MortgageInsuInvestor">Mortgage Insurance Investor :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" name="MortgageInsuInvestor" [(ngModel)]="dataValue.MortgageInsuInvestor" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5">
+                        <label for="CurrentAppraisedValue">Current Appraised Value
+                            <span>*</span> :</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="number" class="form-control" name="CurrentAppraisedValue" [(ngModel)]="dataValue.CurrentAppraisedValue" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 verticalLine">
+                <p>Foreclosure Info:</p>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label>Foreclosure Start Date :</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="CCLStartDate">Corcentric Loan
+                            <span>*</span>
+                        </label>
+                        <br />
+                        <input class="form-control" type="text" name="CCLStartDate" [(ngModel)]="dataValue.CCForeclosure.CCLStartDate"
+                        />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="OLStartDate">Other Loan</label>
+                        <br />
+                        <input class="form-control" type="text" name="OLStartDate" [(ngModel)]="dataValue.CCForeclosure.OLStartDate"
+                        />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label>Foreclosure sale Date :</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="CCLSaleDate">Corcentric Loan
+                            <span>*</span>
+                        </label>
+                        <br />
+                        <input class="form-control" type="text" name="CCLSaleDate" [(ngModel)]="dataValue.CCForeclosure.CCLSaleDate" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="OLSaleDate">Other Loan</label>
+                        <br />
+                        <input class="form-control" type="text" name="OLSaleDate" [(ngModel)]="dataValue.CCForeclosure.OLSaleDate" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section3" *ngIf="submitTrue">
+        <hr>
+        <p>Equity Analysis Details for Pre-closure Determination</p>
+        <hr>
+        <div class="row form-group">
+            <div class="col-md-3">
+                <label for="CurrentAppraisedValue">Current Appraised Value :</label>
+            </div>
+            <div class="col-md-3">
+                {{dataValueDetails.CurrentAppraisedValue}}
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-3">
+                <label for="NetAvailableEquity">Net Available Equity :</label>
+            </div>
+            <div class="col-md-3">
+                {{ dataValueDetails.NetAvailableEquity | currency }}
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-3">
+                <label for="EquityToValueRatio">Equity to Value Ratio :</label>
+            </div>
+            <div class="col-md-3">
+                {{dataValueDetails.EquityToValueRatio}}
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-3">
+                <label for="ClosingCost">Closing Costs :</label>
+            </div>
+            <div class="col-md-3">
+                <div>{{dataValueDetails.ClosingCost}}</div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-3">
+                <label for="FirstMortgageBalanceRatio">First Mortgage Balance Ratio :</label>
+            </div>
+            <div class="col-md-3">
+                <div>{{dataValueDetails.FirstMortgageBalanceRatio}}</div>
+            </div>
+        </div>
+    </div>
+</form>

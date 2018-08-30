@@ -1,0 +1,54 @@
+<div class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="img-fluid" src="../assets/Ameriquest-Brand-.png" alt="background">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Together, we can do more.</h5>
+        <p>AmeriQuest is now Corcentric</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="LoginDiv">
+  <p class="text-center">It’s business as usual, only better. See how we can help you do more.</p>
+
+  <form #loginForm="ngForm" (ngSubmit)="onSignIn($event)">
+    <div class="form-group">
+      <div class="row">
+        <div class="offset-md-2 col-md-3">
+          <input 
+          type="text" 
+          name="username" 
+          required 
+          placeholder="User Name" 
+          class="form-control" 
+          ngModel 
+          #username="ngModel" />
+
+          <div class="alert alert-danger" *ngIf="username.touched && !username.valid">Please enter a valid Username</div>
+        </div>
+        <div class="col-md-3">
+          <input 
+          type="password" 
+          name="password" 
+          required 
+          placeholder="Password" 
+          class="form-control" 
+          ngModel 
+          #password="ngModel" />
+
+          <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Enter a valid Password</div>
+        </div>
+        <div class="col-md-2">
+          <button 
+          name="submit" 
+          class="form-control btn btn-primary" 
+          [disabled]="!loginForm.valid">Sign In</button>
+        </div>
+      </div>
+        <div class="text-center errorDisp alert alert-danger" *ngIf="errorDisplay">
+          {{errorMsg}}
+        </div>
+    </div>
+  </form>
+</div>
